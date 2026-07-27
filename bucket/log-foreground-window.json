@@ -1,0 +1,15 @@
+{
+    "version": "1.4.0",
+    "description": "Logs the windows that take the input focus.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#LogForegroundWindow",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/logforegroundwindow.zip",
+    "hash": "88c6d60da9ae5e3f3ad8b7e8e45006b2c5ac9e9d89a27ba8904e4d1685f60d77",
+    "bin": "LogForegroundWindow.exe",
+    "shortcuts": [
+        [
+            "LogForegroundWindow.exe",
+            "Uwe Sieber\\LogForegroundWindow"
+        ]
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "version": "0.04.0014",
+    "description": "Watches the FAT dirty bit of a volume.",
+    "homepage": "https://www.uwe-sieber.de/usbdlm_help_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/watchfatdirtybit.zip",
+    "hash": "84aac2ab0aff1a9af3d90d270a97991082fb8837c80cca1205432ac170074183",
+    "bin": "WatchFatDirtyBit.exe",
+    "shortcuts": [
+        [
+            "WatchFatDirtyBit.exe",
+            "Uwe Sieber\\WatchFatDirtyBit"
+        ]
+    ]
+}

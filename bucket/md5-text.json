@@ -1,0 +1,15 @@
+{
+    "version": "0.01",
+    "description": "Calculates the MD5 hash of a text, for use in USBDLM password settings.",
+    "homepage": "https://www.uwe-sieber.de/usbdlm_help_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/md5-text.zip",
+    "hash": "d1c6552d75d27a86ed8a5a6da269fd176c720e1d49c720e1c6b98bbfe2baa36b",
+    "bin": "MD5-Text.exe",
+    "shortcuts": [
+        [
+            "MD5-Text.exe",
+            "Uwe Sieber\\MD5-Text"
+        ]
+    ]
+}

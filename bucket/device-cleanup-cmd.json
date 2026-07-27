@@ -1,0 +1,17 @@
+{
+    "version": "1.5.1",
+    "description": "Scriptable command-line removal of non-present devices.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#DeviceCleanupCmd",
+    "license": "Freeware",
+    "architecture": {
+        "64bit": {
+            "url": "https://www.uwe-sieber.de/files/DeviceCleanupCmd_x64.zip",
+            "hash": "d4addf00c28d7cd58fc2d0559678cb282e8bfb45f0d4464a5e3e839022aa2631"
+        },
+        "32bit": {
+            "url": "https://www.uwe-sieber.de/files/DeviceCleanupCmd_Win32.zip",
+            "hash": "0b96a196e4c886f96221ef2cdfaef6270fab7a2cd822e5e00ff01f39b8a9842d"
+        }
+    },
+    "bin": "DeviceCleanupCmd.exe"
+}

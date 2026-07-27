@@ -1,0 +1,15 @@
+{
+    "version": "0.03",
+    "description": "Configures the write cache and removal policy of USB storage devices.",
+    "homepage": "https://www.uwe-sieber.de/drivetools_e.html#USB-WriteCache",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/usb-writecache.zip",
+    "hash": "562175abe8c2804866606f5d92a43cb4c855d6e739a209689e710c47cdf428bb",
+    "bin": "USB-WriteCache.exe",
+    "shortcuts": [
+        [
+            "USB-WriteCache.exe",
+            "Uwe Sieber\\USB-WriteCache"
+        ]
+    ]
+}

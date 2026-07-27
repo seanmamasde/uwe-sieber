@@ -1,0 +1,12 @@
+{
+    "version": "1.0.0",
+    "description": "Enables or disables Windows XP System Restore per drive.",
+    "homepage": "https://www.uwe-sieber.de/drivetools_e.html#SystemRestore",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/srx.zip",
+    "hash": "23719002c425e69821bf265abdba2af850dc057071b57c382d3a7b4d434440da",
+    "bin": [
+        "SRD.exe",
+        "SRE.exe"
+    ]
+}

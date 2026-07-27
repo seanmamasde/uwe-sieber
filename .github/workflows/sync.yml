@@ -1,0 +1,155 @@
+name: Sync
+
+# Replaces Excavator. Versions come from the packaged executable, not from the
+# author's product page, so the standard checkver/autoupdate path is not used.
+# bin/sync.ps1 is HEAD-only for anything that has not changed, so a quiet day
+# costs one conditional request per download against a small personal server.
+on:
+  schedule:
+    - cron: '15 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync manifest versions and hashes
+    runs-on: windows-latest
+    steps:
+      - name: Checkout bucket
+        uses: actions/checkout@v6
+
+      - name: Checkout Scoop
+        uses: actions/checkout@v6
+        with:
+          repository: ScoopInstaller/Scoop
+          path: scoop
+
+      - name: Install test dependencies
+        shell: pwsh
+        run: |
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module -Name Pester -MinimumVersion 5.2.0 -Force -SkipPublisherCheck
+          Install-Module -Name BuildHelpers -MinimumVersion 2.0.1 -Force -SkipPublisherCheck
+
+      # The report is written to a file rather than a step output. Its text
+      # contains upstream-controlled metadata, and a GitHub expression would be
+      # pasted into the next step's script BEFORE PowerShell parses it, which
+      # would let an upstream string run commands with write permissions.
+      - name: Sync
+        id: sync
+        shell: pwsh
+        continue-on-error: true
+        run: |
+          $report = Join-Path $env:RUNNER_TEMP 'sync-report.txt'
+          $out = .\bin\sync.ps1 -Apply *>&1 | Out-String
+          $code = $LASTEXITCODE
+          $out
+          Set-Content -LiteralPath $report -Value $out -Encoding utf8
+          # Emitted only if the updater returned normally. An uncaught crash
+          # stops the script above this line, so 'completed' stays unset and the
+          # commit below is skipped rather than shipping partial state.
+          "completed=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          "errors=$code"   | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+          exit $code
+
+      # A bad manifest must never be committed, so the bucket test suite gates
+      # the commit rather than running after it.
+      - name: Validate before committing
+        if: steps.sync.outputs.completed == 'true'
+        shell: pwsh
+        env:
+          SCOOP_HOME: ${{ github.workspace }}\scoop
+        run: .\bin\test.ps1
+
+      # Native commands do not stop pwsh on failure, and `if (git ...)` tests
+      # stdout rather than the exit code, so every git call is checked directly.
+      - name: Commit
+        if: steps.sync.outputs.completed == 'true'
+        shell: pwsh
+        run: |
+          function Invoke-Git {
+              param([Parameter(ValueFromRemainingArguments)] $Arguments)
+              & git @Arguments
+              if ($LASTEXITCODE -ne 0) { throw "git $($Arguments -join ' ') failed with exit code $LASTEXITCODE" }
+          }
+
+          Invoke-Git config user.name  'github-actions[bot]'
+          Invoke-Git config user.email 'github-actions[bot]@users.noreply.github.com'
+          Invoke-Git add bucket cache
+
+          & git diff --cached --quiet
+          $diff = $LASTEXITCODE
+          switch ($diff) {
+              0 { 'nothing to commit'; break }
+              1 {
+                  Invoke-Git commit -m 'chore: sync manifest versions and hashes'
+                  Invoke-Git push
+                  break
+              }
+              default { throw "git diff --cached failed with exit code $diff" }
+          }
+
+      # always() so a sync error is still reported even when a later step fails.
+      - name: Report unresolved errors
+        if: always() && steps.sync.outputs.errors != '0' && steps.sync.outputs.errors != ''
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $reportPath = Join-Path $env:RUNNER_TEMP 'sync-report.txt'
+          $report = if (Test-Path $reportPath) { Get-Content $reportPath -Raw } else { '(no report captured)' }
+
+          $title = 'Sync reported errors'
+          $lines = @(
+              '`bin\sync.ps1` finished with errors. Affected apps were left untouched'
+              'rather than being updated from a guessed version.'
+              ''
+              'Common causes:'
+              ''
+              '* an archive could not be downloaded or extracted'
+              '* the executable has no `FileVersion` resource and no fallback is'
+              '  configured in `config/sync.json`'
+              '* architectures disagree on `FileVersion`'
+              '* an app with a version-encoded filename moved to a new URL, so'
+              '  `config/sync.json` discovery needs updating'
+              ''
+              '<details><summary>Report</summary>'
+              ''
+              '```'
+              $report.TrimEnd()
+              '```'
+              ''
+              '</details>'
+          )
+          $body = $lines -join "`n"
+
+          $json = gh issue list --repo "$env:GITHUB_REPOSITORY" --state open --search "$title in:title" --json number,title
+          if ($LASTEXITCODE -ne 0) { throw "gh issue list failed with exit code $LASTEXITCODE" }
+
+          # The search is a word match, so the title is compared exactly here to
+          # avoid commenting on an unrelated open issue.
+          $existing = ($json | ConvertFrom-Json) | Where-Object { $_.title -eq $title } | Select-Object -First 1
+
+          if ($existing) {
+              gh issue comment $existing.number --repo "$env:GITHUB_REPOSITORY" --body $body
+          } else {
+              gh issue create --repo "$env:GITHUB_REPOSITORY" --title $title --body $body
+          }
+          if ($LASTEXITCODE -ne 0) { throw "gh issue create/comment failed with exit code $LASTEXITCODE" }
+
+      # continue-on-error above keeps a partial success committable, so the job
+      # status is restored here instead of finishing green with known errors.
+      - name: Fail if the sync reported errors
+        if: always() && steps.sync.outcome == 'failure'
+        shell: pwsh
+        run: |
+          throw "sync reported $(${env:ERRORS}) error(s); see the Sync step log and the tracking issue"
+        env:
+          ERRORS: ${{ steps.sync.outputs.errors }}

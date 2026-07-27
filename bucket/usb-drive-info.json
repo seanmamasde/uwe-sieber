@@ -1,0 +1,23 @@
+{
+    "version": "5.7.6",
+    "description": "Shows volumes, physical drives, bus topology and detailed USB storage information.",
+    "homepage": "https://www.uwe-sieber.de/usbdriveinfo_e.html",
+    "license": "Freeware",
+    "architecture": {
+        "64bit": {
+            "url": "https://www.uwe-sieber.de/files/UsbDriveInfo_x64.zip",
+            "hash": "66ac7cf8a3ad7a10f09e7292ec7ce9bc88140245a387eebf408c49c2d47c123c"
+        },
+        "32bit": {
+            "url": "https://www.uwe-sieber.de/files/UsbDriveInfo_Win32.zip",
+            "hash": "0001139a14b9ca0fb4cef8fe8b7e4c69932f00cb158b6c0d3b93ba826e80d43d"
+        }
+    },
+    "bin": "UsbDriveInfo.exe",
+    "shortcuts": [
+        [
+            "UsbDriveInfo.exe",
+            "Uwe Sieber\\USB Drive Info"
+        ]
+    ]
+}

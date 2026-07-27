@@ -1,0 +1,17 @@
+{
+    "version": "1.5+web.0",
+    "description": "Loads a media into a drive or brings a volume online.",
+    "homepage": "https://www.uwe-sieber.de/drivetools_e.html#loadmedia",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/loadmedia.zip",
+    "hash": "282bf6bd2c737f5c0fff48c6b3cf6ac65c94562c3a1f8cbbb49078bba1032875",
+    "architecture": {
+        "64bit": {
+            "extract_dir": "x64"
+        },
+        "32bit": {
+            "extract_dir": "Win32"
+        }
+    },
+    "bin": "LoadMedia.exe"
+}

@@ -1,0 +1,18 @@
+# Scoop / bucket tooling
+*.log
+
+# Local scratch notes
+link.txt
+
+# Agent tooling state
+.omo/
+.playwright-mcp/
+
+# Editors
+.idea/
+*.swp
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,15 @@
+{
+    "version": "0.5.0",
+    "description": "Converter for hexadecimal, decimal and binary numbers.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#BinHexDec",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/BinHex.zip",
+    "hash": "b5600d240e0947bc2520d4ff0ab96d700b8da4d6e94412f005708e41c8d58ab5",
+    "bin": "BinHex.exe",
+    "shortcuts": [
+        [
+            "BinHex.exe",
+            "Uwe Sieber\\BinHexDec"
+        ]
+    ]
+}

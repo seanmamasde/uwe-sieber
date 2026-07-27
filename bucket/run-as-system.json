@@ -1,0 +1,17 @@
+{
+    "version": "1.4.0",
+    "description": "Starts a process in the SYSTEM account context.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#RunAsSystem",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/RunAsSystem.zip",
+    "hash": "e4abd9c987a8c541c6b9be3cb610dc350c2faaf187b348f6da3f41011a02c51d",
+    "architecture": {
+        "64bit": {
+            "extract_dir": "x64"
+        },
+        "32bit": {
+            "extract_dir": "Win32"
+        }
+    },
+    "bin": "RunAsSystem.exe"
+}

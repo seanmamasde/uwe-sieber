@@ -1,0 +1,25 @@
+name: Issues
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  # The handler can push corrective hash-fix commits.
+  contents: write
+  issues: write
+
+jobs:
+  issueHandler:
+    name: IssueHandler
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: IssueHandler
+        uses: ScoopInstaller/GithubActions@main
+        if: github.event.action == 'opened' || (github.event.action == 'labeled' && contains(github.event.issue.labels.*.name, 'verify'))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SCOOP_BRANCH: develop

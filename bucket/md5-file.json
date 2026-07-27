@@ -1,0 +1,15 @@
+{
+    "version": "0.01.0008",
+    "description": "Calculates the MD5 hash of a file, for use in USBDLM AutoRun validation.",
+    "homepage": "https://www.uwe-sieber.de/usbdlm_help_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/md5-file.zip",
+    "hash": "edff5a17c94f1e263e1ff3a72ecb695156d9dc1eb6f839b738008a6875ce464c",
+    "bin": "MD5-File.exe",
+    "shortcuts": [
+        [
+            "MD5-File.exe",
+            "Uwe Sieber\\MD5-File"
+        ]
+    ]
+}

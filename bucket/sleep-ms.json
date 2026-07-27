@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "description": "Console program that waits for a given number of milliseconds.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#Sleep",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/sleep.zip",
+    "hash": "660385f1c0bda9c5d9e1ea2d6200a437fedf106a4cad8fa8e45bd7d50c8db15c",
+    "architecture": {
+        "64bit": {
+            "extract_dir": "x64"
+        },
+        "32bit": {
+            "extract_dir": "Win32"
+        }
+    },
+    "bin": [
+        [
+            "Sleep.exe",
+            "uwe-sleep"
+        ]
+    ]
+}

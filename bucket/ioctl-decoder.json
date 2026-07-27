@@ -1,0 +1,15 @@
+{
+    "version": "0.04",
+    "description": "Decodes Windows DeviceIoControl IOCTL and FSCTL codes.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#IoctlDecoder",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/IoctlDecoder.zip",
+    "hash": "dcf144a564cf42a9c77a7c011832175bcb224fd380ce69d19804d81ede246ca8",
+    "bin": "IoctlDecoder.exe",
+    "shortcuts": [
+        [
+            "IoctlDecoder.exe",
+            "Uwe Sieber\\IOCTL Decoder"
+        ]
+    ]
+}

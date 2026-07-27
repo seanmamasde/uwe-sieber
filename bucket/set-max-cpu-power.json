@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "description": "Sets the maximum CPU power percentage of the active power plan.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#SetMaxCpuPower",
+    "license": "Freeware",
+    "architecture": {
+        "64bit": {
+            "url": "https://www.uwe-sieber.de/files/SetMaxCpuPower_x64.zip",
+            "hash": "9a0a8d3a1864df30fae21e28cac148a0d5f85ca16481d950a5af88cb7272922e"
+        },
+        "32bit": {
+            "url": "https://www.uwe-sieber.de/files/SetMaxCpuPower_Win32.zip",
+            "hash": "0b58548f073dbedf940cf9d789e887c858227a85e860f834b8eaa85cc50b3bbf"
+        }
+    },
+    "bin": "SetMaxCpuPower.exe"
+}

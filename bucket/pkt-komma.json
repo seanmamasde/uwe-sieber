@@ -1,0 +1,15 @@
+{
+    "version": "1.0+web.0",
+    "description": "Uses Caps Lock to switch the numeric keypad between comma and period.",
+    "homepage": "https://www.uwe-sieber.de/pktkomma.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/pktkomma.zip",
+    "hash": "89aadc34c540d07f445ebbd733e4378744573df4dc5d2d36182177bb67ecb10f",
+    "bin": "PktKomma.exe",
+    "shortcuts": [
+        [
+            "PktKomma.exe",
+            "Uwe Sieber\\PktKomma"
+        ]
+    ]
+}

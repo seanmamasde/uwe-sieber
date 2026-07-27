@@ -1,0 +1,15 @@
+{
+    "version": "0.05.0029",
+    "description": "Paints the area around a console window black.",
+    "homepage": "https://www.uwe-sieber.de/dosfon_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/consoleblackfill.zip",
+    "hash": "717eb47e1b282d4c2d3fe99cb243204d71143d7105d0b5afffb4613f3257ed81",
+    "bin": "ConsoleBlackFill.exe",
+    "shortcuts": [
+        [
+            "ConsoleBlackFill.exe",
+            "Uwe Sieber\\ConsoleBlackFill"
+        ]
+    ]
+}

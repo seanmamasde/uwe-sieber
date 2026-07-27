@@ -1,0 +1,35 @@
+{
+    "$comment": [
+        "Exceptions used by bin/sync.ps1. Manifests themselves carry no checkver,",
+        "no autoupdate and no custom fields, so everything unusual lives here.",
+        "",
+        "discovery : the download filename encodes a version, so the product page",
+        "            is used to find the next concrete URL. $pageCleanVersion is",
+        "            the page version with dots removed (2.0.0 -> 200).",
+        "fallback  : the executable carries no FileVersion resource, so the",
+        "            manifest version falls back to the page version and is",
+        "            flagged as <pageVersion>+web.<revision>."
+    ],
+    "attach-vhd": {
+        "discovery": {
+            "url": "https://www.uwe-sieber.de/drivetools_e.html",
+            "regex": "AttachVHD V([\\d.]+)",
+            "architecture": {
+                "64bit": "https://www.uwe-sieber.de/files/AttachVHD$pageCleanVersion_x64.zip",
+                "32bit": "https://www.uwe-sieber.de/files/AttachVHD$pageCleanVersion_Win32.zip"
+            }
+        }
+    },
+    "load-media": {
+        "fallback": {
+            "url": "https://www.uwe-sieber.de/drivetools_e.html",
+            "regex": "LoadMedia V([\\d.]+)"
+        }
+    },
+    "pkt-komma": {
+        "fallback": {
+            "version": "1.0",
+            "comment": "Frozen 1999 release. No FileVersion resource, no version on pktkomma.html and none in the bundled PktKomma.txt, so this value is maintained by hand."
+        }
+    }
+}

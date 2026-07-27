@@ -1,0 +1,15 @@
+{
+    "version": "1.04.0064",
+    "description": "Graphical editor for the Windows AutoRun and AutoPlay policy settings.",
+    "homepage": "https://www.uwe-sieber.de/drivetools_e.html#autorun",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/autorunsettings.zip",
+    "hash": "043dd94d8c6833b81b6e495fc10c87715885f9a76652f730f6d9a3e461034cbe",
+    "bin": "AutoRunSettings.exe",
+    "shortcuts": [
+        [
+            "AutoRunSettings.exe",
+            "Uwe Sieber\\AutoRun Settings"
+        ]
+    ]
+}

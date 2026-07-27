@@ -1,0 +1,15 @@
+{
+    "version": "1.4.0",
+    "description": "Logs windows that appear at a given screen position.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#LogWindowAtPoint",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/logwindowatpoint.zip",
+    "hash": "0093ee233fce8b9c447489b6be9e9adaa988af6e8293127169d80af3a60e835a",
+    "bin": "LogWindowAtPoint.exe",
+    "shortcuts": [
+        [
+            "LogWindowAtPoint.exe",
+            "Uwe Sieber\\LogWindowAtPoint"
+        ]
+    ]
+}

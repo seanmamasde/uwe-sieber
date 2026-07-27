@@ -1,0 +1,35 @@
+{
+    "version": "5.7.6",
+    "description": "USB Drive Letter Manager - Windows service that controls drive letter assignment for USB drives.",
+    "homepage": "https://www.uwe-sieber.de/usbdlm_e.html",
+    "license": {
+        "identifier": "Shareware",
+        "url": "https://www.uwe-sieber.de/usbdlm_e.html#licence"
+    },
+    "notes": [
+        "USBDLM runs as a Windows service. To register it, open an elevated shell in the app directory and run _service_register.cmd",
+        "Settings live in USBDLM.ini, which is persisted across updates. Run _edit-ini.cmd to edit it; USBDLM_sample.ini and USBDLM_sample_full.ini document the available options.",
+        "Not free for general use. The author grants a free licence to public schools, universities and other non-profit educational institutions, and to public libraries that are free to use. All other users, including private users, get 30 days to evaluate, after which one licence per computer must be purchased. See https://www.uwe-sieber.de/usbdlm_e.html#licence"
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://www.uwe-sieber.de/files/usbdlm_x64.zip",
+            "hash": "bca548132eeec3ab5c62ca96b6493bb77b434a767b9150bc98423c7c0efb7179"
+        },
+        "32bit": {
+            "url": "https://www.uwe-sieber.de/files/usbdlm_Win32.zip",
+            "hash": "2e8da2e67458f45137ee57ff92147c4b5c0f94e2c1b60f78579b040988114112"
+        }
+    },
+    "extract_dir": "USBDLM",
+    "bin": [
+        "USBDLM.exe",
+        "USBDLM_usr.exe"
+    ],
+    "pre_install": [
+        "if (!(Test-Path \"$persist_dir\\USBDLM.ini\") -and !(Test-Path \"$dir\\USBDLM.ini\")) {",
+        "    Copy-Item \"$dir\\USBDLM_sample.ini\" \"$dir\\USBDLM.ini\"",
+        "}"
+    ],
+    "persist": "USBDLM.ini"
+}
