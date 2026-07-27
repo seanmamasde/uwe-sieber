@@ -1,0 +1,24 @@
+{
+    "version": "2.3.1",
+    "description": "Reassigns drive letters and NTFS mount points.",
+    "homepage": "https://www.uwe-sieber.de/drivetools_e.html#remount",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/remount.zip",
+    "hash": "62ebce94b81e1de1b3cc0fbf80218f387c59329b4dce2cb5ac9cfd1338fa73e3",
+    "architecture": {
+        "64bit": {
+            "extract_dir": "x64"
+        },
+        "32bit": {
+            "extract_dir": "Win32"
+        }
+    },
+    "bin": "ReMount.exe",
+    "checkver": {
+        "url": "https://www.uwe-sieber.de/drivetools_e.html",
+        "regex": "ReMount V([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "https://www.uwe-sieber.de/files/remount.zip"
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "version": "3.37",
+    "description": "ButtonBar - configurable desktop shortcut bar inspired by the old Microsoft Office toolbar.",
+    "homepage": "https://www.uwe-sieber.de/bbar_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/BBar.zip",
+    "hash": "73cb2ecf6ec4008f380edbb49f14f406c09f59bb4e4459605797d0664b1cfbcf",
+    "bin": "BBar.exe",
+    "shortcuts": [
+        [
+            "BBar.exe",
+            "Uwe Sieber\\ButtonBar"
+        ]
+    ],
+    "checkver": {
+        "url": "https://www.uwe-sieber.de/bbar_e.html",
+        "regex": "ButtonBar V([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "https://www.uwe-sieber.de/files/BBar.zip"
+    }
+}

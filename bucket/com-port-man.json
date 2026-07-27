@@ -1,0 +1,49 @@
+{
+    "version": "1.2.6",
+    "description": "Windows service that controls automatic COM port number assignment.",
+    "homepage": "https://www.uwe-sieber.de/ComPortMan_e.html",
+    "license": {
+        "identifier": "Shareware",
+        "url": "https://www.uwe-sieber.de/ComPortMan_e.html"
+    },
+    "notes": [
+        "ComPortMan runs as a Windows service. To register it, open an elevated shell in the app directory and run _service_register.cmd",
+        "Settings live in ComPortMan.ini, which is persisted across updates. Run _edit_ini.cmd to edit it.",
+        "Not free for general use. The author grants a free licence to public schools, universities and other non-profit educational institutions, and to public libraries that are free to use. All other users, including private users, get 30 days to evaluate, after which one licence per computer must be purchased. See https://www.uwe-sieber.de/ComPortMan_e.html"
+    ],
+    "architecture": {
+        "64bit": {
+            "url": "https://www.uwe-sieber.de/files/ComPortMan_x64.zip",
+            "hash": "3c86d80ff88905ddbb829bb06aebe9fa184a549374aec346c1ce87a382c24827"
+        },
+        "32bit": {
+            "url": "https://www.uwe-sieber.de/files/ComPortMan_Win32.zip",
+            "hash": "0263f513eb83ab01f2844510684eff79d79d9e37e5318af9bf5bcd3a88c90ff1"
+        }
+    },
+    "extract_dir": "ComPortMan",
+    "bin": [
+        "ComPortMan.exe",
+        "ComPortInfo.exe"
+    ],
+    "pre_install": [
+        "if (!(Test-Path \"$persist_dir\\ComPortMan.ini\") -and !(Test-Path \"$dir\\ComPortMan.ini\")) {",
+        "    New-Item -ItemType File -Path \"$dir\\ComPortMan.ini\" | Out-Null",
+        "}"
+    ],
+    "persist": "ComPortMan.ini",
+    "checkver": {
+        "url": "https://www.uwe-sieber.de/ComPortMan_e.html",
+        "regex": "ComPortMan V([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://www.uwe-sieber.de/files/ComPortMan_x64.zip"
+            },
+            "32bit": {
+                "url": "https://www.uwe-sieber.de/files/ComPortMan_Win32.zip"
+            }
+        }
+    }
+}

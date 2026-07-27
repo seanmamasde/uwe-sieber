@@ -1,0 +1,37 @@
+{
+    "version": "1.2.6",
+    "description": "Displays and manages COM ports and their device and bus properties.",
+    "homepage": "https://www.uwe-sieber.de/ComPortInfo_e.html",
+    "license": "Freeware",
+    "architecture": {
+        "64bit": {
+            "url": "https://www.uwe-sieber.de/files/ComPortInfo_x64.zip",
+            "hash": "4ed77ad5070c73c34543b76ce1c0f3c2304e10fd3e84168164d1f4617d2a61bc"
+        },
+        "32bit": {
+            "url": "https://www.uwe-sieber.de/files/ComPortInfo_Win32.zip",
+            "hash": "71915c4e57f216f9d833f822e9b3b3bf7ec2dc6a30b9735e3ee3fe3f05930ed2"
+        }
+    },
+    "bin": "ComPortInfo.exe",
+    "shortcuts": [
+        [
+            "ComPortInfo.exe",
+            "Uwe Sieber\\COM Port Info"
+        ]
+    ],
+    "checkver": {
+        "url": "https://www.uwe-sieber.de/ComPortInfo_e.html",
+        "regex": "COM Port Info V([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://www.uwe-sieber.de/files/ComPortInfo_x64.zip"
+            },
+            "32bit": {
+                "url": "https://www.uwe-sieber.de/files/ComPortInfo_Win32.zip"
+            }
+        }
+    }
+}

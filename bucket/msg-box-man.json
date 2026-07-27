@@ -1,0 +1,22 @@
+{
+    "version": "1.0",
+    "description": "Automatically answers message boxes and automates arbitrary windows.",
+    "homepage": "https://www.uwe-sieber.de/msgboxman.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/msgboxman.zip",
+    "hash": "88848f864b3fac53e6dec696913a761529c4c9311ab3e8edc7f0a864349f85d5",
+    "bin": "MsgBoxMan.exe",
+    "shortcuts": [
+        [
+            "MsgBoxMan.exe",
+            "Uwe Sieber\\MsgBoxMan"
+        ]
+    ],
+    "checkver": {
+        "url": "https://www.uwe-sieber.de/msgboxman.html",
+        "regex": "MsgBoxMan V([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "https://www.uwe-sieber.de/files/msgboxman.zip"
+    }
+}

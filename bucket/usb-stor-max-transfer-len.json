@@ -1,0 +1,23 @@
+{
+    "version": "1.0.1",
+    "description": "Tests and changes the USBSTOR MaximumTransferLength setting.",
+    "homepage": "https://www.uwe-sieber.de/drivetools_e.html#UsbStorMaxTransferLen",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/UsbStorMaxTransferLen.zip",
+    "hash": "beece6fd322a3bbe1d0dbb010454da661b1d59e3d0edf51f91733b42ece55bf6",
+    "architecture": {
+        "64bit": {
+            "extract_dir": "x64"
+        },
+        "32bit": {
+            "extract_dir": "Win32"
+        }
+    },
+    "bin": "UsbStorMaxTransferLen.exe",
+    "shortcuts": [
+        [
+            "UsbStorMaxTransferLen.exe",
+            "Uwe Sieber\\UsbStorMaxTransferLen"
+        ]
+    ]
+}

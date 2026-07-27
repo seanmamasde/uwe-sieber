@@ -1,0 +1,3 @@
+# Scoop's bucket test suite (Scoop-00File.Tests.ps1) requires CRLF for every
+# tracked file, with no exemption for .yml or .md.
+* text=auto eol=crlf

@@ -1,0 +1,22 @@
+{
+    "version": "1.08",
+    "description": "Long-term oscilloscope and data logger for Metex compatible multimeters.",
+    "homepage": "https://www.uwe-sieber.de/mscope_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/mscope.zip",
+    "hash": "4d39f2166d7f2d1845a229f6ff4fcf8f62d9b704923b0fdb475416ebcf4b78d8",
+    "bin": "MScope.exe",
+    "shortcuts": [
+        [
+            "MScope.exe",
+            "Uwe Sieber\\MScope"
+        ]
+    ],
+    "checkver": {
+        "url": "https://www.uwe-sieber.de/mscope_e.html",
+        "regex": "MScope ([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "https://www.uwe-sieber.de/files/mscope.zip"
+    }
+}

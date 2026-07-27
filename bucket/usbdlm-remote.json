@@ -1,0 +1,15 @@
+{
+    "version": "0.1.0.1",
+    "description": "USBDLM Remote Password Tool - sends a USBDLM password to a remote client.",
+    "homepage": "https://www.uwe-sieber.de/usbdlm_help_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/USBDLM-Remote.zip",
+    "hash": "f1e778609c37b80b0369de38ceae7a81d6897e258f9bfed3de897a0274f6492c",
+    "bin": "USBDLM-Remote.exe",
+    "shortcuts": [
+        [
+            "USBDLM-Remote.exe",
+            "Uwe Sieber\\USBDLM Remote Password Tool"
+        ]
+    ]
+}

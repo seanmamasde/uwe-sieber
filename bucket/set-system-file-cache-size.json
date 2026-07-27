@@ -1,0 +1,17 @@
+{
+    "version": "0.3",
+    "description": "Command-line tool that limits the Windows file cache working set.",
+    "homepage": "https://www.uwe-sieber.de/ntcacheset_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/setsystemfilecachesize.zip",
+    "hash": "4ad48ac93d15aa77a3a9f6e7c43455d742a8c6c649d1f02b5dc81e3abfeefcbf",
+    "architecture": {
+        "64bit": {
+            "extract_dir": "x64"
+        },
+        "32bit": {
+            "extract_dir": "Win32"
+        }
+    },
+    "bin": "SetSystemFileCacheSize.exe"
+}

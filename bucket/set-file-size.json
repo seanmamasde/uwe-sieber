@@ -1,0 +1,31 @@
+{
+    "version": "1.2",
+    "description": "Sets a file to an exact requested size.",
+    "homepage": "https://www.uwe-sieber.de/filetools_e.html",
+    "license": "Freeware",
+    "architecture": {
+        "64bit": {
+            "url": "https://www.uwe-sieber.de/files/SetFileSize_x64.zip",
+            "hash": "12e0ac780cddeb912f8d331ed4b16bb29fc6b1059e84d2aaec6bdce69a35c8ab"
+        },
+        "32bit": {
+            "url": "https://www.uwe-sieber.de/files/SetFileSize_Win32.zip",
+            "hash": "2316d7c282bfdea1f3a2e911043996dd9404c30aaaca8ce4857488fb689a8d19"
+        }
+    },
+    "bin": "SetFileSize.exe",
+    "checkver": {
+        "url": "https://www.uwe-sieber.de/filetools_e.html",
+        "regex": "SetFileSize V([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://www.uwe-sieber.de/files/SetFileSize_x64.zip"
+            },
+            "32bit": {
+                "url": "https://www.uwe-sieber.de/files/SetFileSize_Win32.zip"
+            }
+        }
+    }
+}

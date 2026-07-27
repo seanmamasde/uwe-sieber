@@ -1,0 +1,9 @@
+{
+    "version": "0.3",
+    "description": "Lists DOS device names and the kernel objects they point to.",
+    "homepage": "https://www.uwe-sieber.de/drivetools_e.html#listdosdevices",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/listdosdevices.zip",
+    "hash": "ee1b2e271056da024ae1457e70f9c9756a1e464b7b9c4727553a7f5e83fc94b3",
+    "bin": "ListDOSdevices.exe"
+}

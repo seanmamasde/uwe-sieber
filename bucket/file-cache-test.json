@@ -1,0 +1,15 @@
+{
+    "version": "0.09",
+    "description": "Tests Windows file cache behaviour with different CreateFile flags.",
+    "homepage": "https://www.uwe-sieber.de/ntcacheset_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/filecachetest.zip",
+    "hash": "3f89e8311a4459ea43a9e862247c6351b26a492f1601882b4a70e895f81a8d67",
+    "bin": "FileCacheTest.exe",
+    "shortcuts": [
+        [
+            "FileCacheTest.exe",
+            "Uwe Sieber\\FileCacheTest"
+        ]
+    ]
+}

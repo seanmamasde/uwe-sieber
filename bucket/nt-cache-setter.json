@@ -1,0 +1,15 @@
+{
+    "version": "0.4",
+    "description": "Limits and trims the Windows file cache working set.",
+    "homepage": "https://www.uwe-sieber.de/ntcacheset_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/ntcacheset.zip",
+    "hash": "5d0c670e63b411d8d3d4b02d4f1c99481b18a56ba06c80fbdcc14cd3406b9bfb",
+    "bin": "NtCacheSet.exe",
+    "shortcuts": [
+        [
+            "NtCacheSet.exe",
+            "Uwe Sieber\\NT Cache Setter"
+        ]
+    ]
+}

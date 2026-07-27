@@ -1,0 +1,22 @@
+{
+    "version": "1.02",
+    "description": "Online Taxometer - dial-up connection timer with traffic aware automatic disconnect.",
+    "homepage": "https://www.uwe-sieber.de/otax.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/otax.zip",
+    "hash": "4ba5b4396b73b306b697052bbcc2de4330791743ca016ee838b6431201390828",
+    "bin": "OTax.exe",
+    "shortcuts": [
+        [
+            "OTax.exe",
+            "Uwe Sieber\\OTax"
+        ]
+    ],
+    "checkver": {
+        "url": "https://www.uwe-sieber.de/otax.html",
+        "regex": "Online Taxometer V([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "https://www.uwe-sieber.de/files/otax.zip"
+    }
+}

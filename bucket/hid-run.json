@@ -1,0 +1,24 @@
+{
+    "version": "1.0",
+    "description": "Starts an executable with a hidden window.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#HidRun",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/HidRun.zip",
+    "hash": "2919365ff21efe2ed047af40774d6d7be97d7b819cd85d5dd78389e00281bac5",
+    "architecture": {
+        "64bit": {
+            "extract_dir": "x64"
+        },
+        "32bit": {
+            "extract_dir": "Win32"
+        }
+    },
+    "bin": "HidRun.exe",
+    "checkver": {
+        "url": "https://www.uwe-sieber.de/misc_tools_e.html",
+        "regex": "HidRun V([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "https://www.uwe-sieber.de/files/HidRun.zip"
+    }
+}

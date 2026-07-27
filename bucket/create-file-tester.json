@@ -1,0 +1,15 @@
+{
+    "version": "1.03",
+    "description": "Tests the Windows API call CreateFile with different flags.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#CreateFileTest",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/CreateFileTest.zip",
+    "hash": "a4ca610071bd90cbb0cc23b1ad816a5d9ee2abe0ae4f2b8ed56f1a323d45af7f",
+    "bin": "CreateFileTest.exe",
+    "shortcuts": [
+        [
+            "CreateFileTest.exe",
+            "Uwe Sieber\\CreateFile Tester"
+        ]
+    ]
+}

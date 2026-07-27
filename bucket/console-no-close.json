@@ -1,0 +1,9 @@
+{
+    "version": "0.9",
+    "description": "Deactivates the close button of one or all console windows.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html#ConsoleNoClose",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/ConsoleNoClose.zip",
+    "hash": "b02194c9a42d94b40742d2111e42cfb154cd3ea004e092583154f22199e88d3c",
+    "bin": "ConsoleNoClose.exe"
+}

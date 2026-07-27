@@ -1,0 +1,24 @@
+{
+    "version": "1.2.6",
+    "description": "Command-line version of COM Port Info.",
+    "homepage": "https://www.uwe-sieber.de/ComPortInfo_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/ListComPorts.zip",
+    "hash": "1e2e1de24184088dc6e76e51e9b7a02e12b2b87261403f0f5d25d39c90bcd757",
+    "architecture": {
+        "64bit": {
+            "extract_dir": "x64"
+        },
+        "32bit": {
+            "extract_dir": "Win32"
+        }
+    },
+    "bin": "ListComPorts.exe",
+    "checkver": {
+        "url": "https://www.uwe-sieber.de/ComPortInfo_e.html",
+        "regex": "COM Port Info V([\\d.]+)"
+    },
+    "autoupdate": {
+        "url": "https://www.uwe-sieber.de/files/ListComPorts.zip"
+    }
+}

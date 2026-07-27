@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Validate manifests
+    runs-on: windows-latest
+    steps:
+      - name: Checkout bucket
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Checkout Scoop
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          repository: ScoopInstaller/Scoop
+          path: scoop
+
+      # Scoop's Import-Bucket-Tests.ps1 declares a #requires on BuildHelpers in
+      # addition to Pester, and PSGallery installs fail under Windows
+      # PowerShell 5.1 unless TLS 1.2 is forced. Using pwsh avoids both issues.
+      - name: Install test dependencies
+        shell: pwsh
+        run: |
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module -Name Pester -MinimumVersion 5.2.0 -Force -SkipPublisherCheck
+          Install-Module -Name BuildHelpers -MinimumVersion 2.0.1 -Force -SkipPublisherCheck
+
+      - name: Run bucket tests
+        shell: pwsh
+        env:
+          SCOOP_HOME: ${{ github.workspace }}\scoop
+        run: .\bin\test.ps1

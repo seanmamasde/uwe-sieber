@@ -1,0 +1,15 @@
+{
+    "version": "0.09",
+    "description": "Simple window inspector that reports window text and class.",
+    "homepage": "https://www.uwe-sieber.de/misc_tools_e.html",
+    "license": "Freeware",
+    "url": "https://www.uwe-sieber.de/files/wininfo.zip",
+    "hash": "73a28544cd6c19cacfc2e22251342fa8a8ddc93c7265e62499d6a39724424918",
+    "bin": "WinInfo.exe",
+    "shortcuts": [
+        [
+            "WinInfo.exe",
+            "Uwe Sieber\\WinInfo"
+        ]
+    ]
+}
