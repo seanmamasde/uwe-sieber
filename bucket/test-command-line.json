@@ -1,10 +1,10 @@
 {
-    "version": "1.04.0139",
+    "version": "1.06.0165",
     "description": "Shows command line, working directory, privileges and window style of a started process.",
     "homepage": "https://www.uwe-sieber.de/usbdlm_help_e.html",
     "license": "Freeware",
     "url": "https://www.uwe-sieber.de/files/testcommandline.zip",
-    "hash": "5ecba2e200d70c8c1ca17ab09846575500b2099222723fe98864ed3c30347afd",
+    "hash": "4ff62b34ea61d3e940d887cdc4706950cd538ed3ac2b9b248f6beea4e12a6426",
     "bin": "TestCommandline.exe",
     "shortcuts": [
         [
