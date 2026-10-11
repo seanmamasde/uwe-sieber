@@ -20,6 +20,13 @@
             }
         }
     },
+    "list-usb-devs": {
+        "fallback": {
+            "url": "https://www.uwe-sieber.de/misc_tools_e.html",
+            "regex": "ListUsbDevs V(\\d+(?:\\.\\d+)*)",
+            "comment": "Republished 2026-10-04 without a version resource (the binary reports V0.0.0)."
+        }
+    },
     "load-media": {
         "fallback": {
             "url": "https://www.uwe-sieber.de/drivetools_e.html",

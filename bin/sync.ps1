@@ -15,9 +15,12 @@
       3. Writes the normalised FileVersion, the new SHA-256 and, where the
          download URL encodes the version, the new URL.
 
-    Everything an app touches is staged as a candidate and committed only when
-    that whole app validates, so a failure leaves the manifest and the cache
-    exactly as they were. Without -Apply nothing on disk is modified at all.
+    Everything an app touches is staged as a candidate. A download, extraction
+    or layout failure leaves the manifest and the cache exactly as they were.
+    A version that cannot be resolved never blocks the hash, though: every URL
+    is stable, so the previous bytes no longer exist upstream and a stale hash
+    would break every install. The version is held and the problem reported.
+    Without -Apply nothing on disk is modified at all.
 
     Where an executable carries no FileVersion resource the version falls back
     to the product page, flagged <pageVersion>+web.<revision>. The fallback
@@ -72,6 +75,26 @@ function Set-FileAtomic {
     $tmp = "$Path.tmp"
     [IO.File]::WriteAllText($tmp, $Content, (New-Object Text.UTF8Encoding $false))
     Move-Item -LiteralPath $tmp -Destination $Path -Force
+}
+
+# uwe-sieber.de is a small personal server and a few TLS handshakes per run
+# fail transiently from CI. Retry anything without an HTTP response (TLS,
+# connection, timeout) and 429/5xx, but never other HTTP errors: a 404 must
+# surface immediately.
+function Invoke-WithRetry {
+    param([scriptblock] $Action, [int] $Attempts = 3)
+    for ($i = 1; ; $i++) {
+        try {
+            return (& $Action)
+        } catch {
+            $code = $null
+            $resp = $_.Exception.PSObject.Properties['Response']
+            if ($resp -and $resp.Value) { $code = [int]$resp.Value.StatusCode }
+            $transient = (-not $code) -or $code -eq 429 -or $code -ge 500
+            if (-not $transient -or $i -ge $Attempts) { throw }
+            Start-Sleep -Seconds ([math]::Pow(2, $i))
+        }
+    }
 }
 
 # Normalise a raw FileVersion resource into a manifest version.
@@ -137,7 +160,7 @@ function Get-FallbackVersion {
 function Get-PageVersion {
     param([string] $Url, [string] $Regex)
     try {
-        $html = (Invoke-WebRequest -Uri $Url -UserAgent $ua -TimeoutSec 60 -UseBasicParsing).Content
+        $html = (Invoke-WithRetry { Invoke-WebRequest -Uri $Url -UserAgent $ua -TimeoutSec 60 -UseBasicParsing }).Content
     } catch {
         return $null
     }
@@ -359,7 +382,7 @@ foreach ($f in $manifests) {
         $isNewUrl = $urlMap.Values -contains $d.url
 
         try {
-            $head = Invoke-WebRequest -Uri $d.url -Method Head -UserAgent $ua -TimeoutSec 60
+            $head = Invoke-WithRetry { Invoke-WebRequest -Uri $d.url -Method Head -UserAgent $ua -TimeoutSec 60 }
         } catch {
             $appErrors += "$name : HEAD failed for $($d.url) - $($_.Exception.Message)"
             $results += [pscustomobject]@{ State = 'Error' }
@@ -393,7 +416,7 @@ foreach ($f in $manifests) {
         $tmp = Join-Path ([IO.Path]::GetTempPath()) (([IO.Path]::GetRandomFileName()) + '.zip')
         $infos = $null
         try {
-            Invoke-WebRequest -Uri $d.url -OutFile $tmp -UserAgent $ua -TimeoutSec 300
+            Invoke-WithRetry { Invoke-WebRequest -Uri $d.url -OutFile $tmp -UserAgent $ua -TimeoutSec 300 }
             $sha = (Get-FileHash $tmp -Algorithm SHA256).Hash.ToLower()
             $infos = Get-ArchiveVersions -Zip $tmp -ExeName $d.exe -Targets $d.targets
         } catch {
@@ -432,41 +455,46 @@ foreach ($f in $manifests) {
         continue
     }
 
-    # Architectures must agree. A mismatch is an error, not something to guess.
+    # Every download succeeded and every archive is valid from here on. Since
+    # the URLs are stable the previous bytes are gone upstream, so a version
+    # that cannot be resolved must not hold the hash back: the version is held
+    # instead and the problem reported. Architectures must still agree.
     $found = @($results | Where-Object State -eq 'Found')
     $missing = @($results | Where-Object State -eq 'MissingResource')
-    if ($found.Count -gt 0 -and $missing.Count -gt 0) {
-        $errors += "$name : some architectures report a FileVersion and others do not, left unchanged"
-        continue
-    }
     $distinct = @($found.Version | Sort-Object -Unique)
-    if ($distinct.Count -gt 1) {
-        $errors += "$name : architectures disagree on FileVersion ($($distinct -join ' vs ')), left unchanged"
-        continue
-    }
 
     $newVersion = $null
-    if ($distinct.Count -eq 1) {
+    $versionProblem = $null
+    if ($found.Count -gt 0 -and $missing.Count -gt 0) {
+        $versionProblem = 'some architectures report a FileVersion and others do not'
+    } elseif ($distinct.Count -gt 1) {
+        $versionProblem = "architectures disagree on FileVersion ($($distinct -join ' vs '))"
+    } elseif ($distinct.Count -eq 1) {
         $newVersion = $distinct[0]
+    } elseif (-not $cfg.fallback) {
+        $versionProblem = 'no FileVersion resource and no fallback configured in config/sync.json'
     } else {
         # Every architecture reported MissingResource, so fall back to the page.
         $fb = $cfg.fallback
-        if (-not $fb) {
-            $errors += "$name : no FileVersion resource and no fallback configured in config/sync.json"
-            continue
-        }
         $pageVersion = if ($fb.version) { $fb.version } else { Get-PageVersion -Url $fb.url -Regex $fb.regex }
         if (-not $pageVersion) {
-            $errors += "$name : no FileVersion resource and the page version could not be read"
-            continue
+            $versionProblem = 'no FileVersion resource and the page version could not be read'
+        } else {
+            $fbr = Get-FallbackVersion -PageVersion $pageVersion -CurrentManifestVersion $m.version -BytesChanged $bytesChanged
+            if ($fbr.Ok) {
+                $newVersion = $fbr.Version
+                $flagged += "$name -> $newVersion"
+            } else {
+                $versionProblem = $fbr.Detail
+            }
         }
-        $fbr = Get-FallbackVersion -PageVersion $pageVersion -CurrentManifestVersion $m.version -BytesChanged $bytesChanged
-        if (-not $fbr.Ok) {
-            $errors += "$name : $($fbr.Detail), left unchanged"
-            continue
-        }
-        $newVersion = $fbr.Version
-        $flagged += "$name -> $newVersion"
+    }
+
+    if ($versionProblem) {
+        $newVersion = $m.version
+        $held = "version held at $($m.version)"
+        if ($hashMap.Count -gt 0) { $held = "hash updated so installs keep working, $held" }
+        $errors += "$name : $versionProblem; $held"
     }
 
     $unchanged += $appUnchanged

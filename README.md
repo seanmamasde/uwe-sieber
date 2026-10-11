@@ -24,8 +24,8 @@ Free only for non-profit education and free public libraries; everyone else gets
 ## Versions
 
 Versions come from the executable's own `FileVersion`, not the product page,
-which is often stale and disagrees with the shipped binary. Two tools carry no
-version resource and fall back to the page version tagged `+web.N`.
+which is often stale and disagrees with the shipped binary. Builds without a
+version resource fall back to the page version tagged `+web.N`.
 
 One-off: `msg-box-man` reports `0.09.0073` where the page claimed `1.0`, so the
 correct version is lower than what was published. Run
